@@ -63,18 +63,24 @@ contentEval(function () {
 		var delayNotice = function (msg, time) {
 			if (dAmnChatTabStack.length > 0) {
 				setTimeout(MiddleMan.Interface.chatNotice, 0, false, msg, false, time);
+				console.log('immediate notice');
 			} else {
 				var key = 'delayNotice_' + Date.now().toString() + '-' + Math.random().toString();
+				console.log('delay notice', key);
 				MiddleMan.Event.bind('dAmnChat_self', 'join', key, function () {
+					console.log('delayed notice firing', key);
 					try {
 						MiddleMan.Interface.chatNotice(false, msg, false, time);
 					} catch (e) {
+						console.log(e);
 						var i = 0;
 						var timeout = function () {
 							if (i++ < 20) {
+								console.log('try ' + i);
 								try {
 									MiddleMan.Interface.chatNotice(false, msg, false, time);
 								} catch (e) {
+									console.log(e);
 									setTimeout(timeout, 500);
 								}
 							} else {
@@ -334,7 +340,7 @@ contentEval(function () {
 
 			if (this.blacklist.indexOf(name) === -1 && this.blacklist.indexOf(msg) === -1) {
 				// Not blacklisted
-				if (!this.users[user] || !(this.users[user][0] !== name && this.users[user][1] !== msg)) {
+				if (!this.users[user] || (this.users[user][0] !== name && this.users[user][1] !== msg)) {
 					this.users[user] = [name, msg];
 					var css = '.u-$user .from { color:#$name; } .u-$user .text { color: #$msg; }';
 					css = css.replace(/\$user/g, user);
@@ -494,8 +500,11 @@ contentEval(function () {
 
 				(function () {
 					MiddleMan.Event.bind('dAmnChat_self', 'join', 'sd-prefs-detect', function () {
+						console.log('Joined');
 						var i = 0;
+						console.log('testing for SD');
 						if ($('#sdprefsbtn')) {
+							console.log('Fixing for SD');
 							// Position the button's right
 							var rPos = 0;
 							$('.damnc-header').children().each(function(){
@@ -529,7 +538,6 @@ contentEval(function () {
 				var name = chromacity.load('name');
 				var msg = chromacity.load('msg');
 				if (name && msg) {
-					chromacity.change(name, msg);
 					$("#name-color-box").val(name).validHex().applyFarbtastic();
 					$("#msg-color-box").val(msg).validHex().applyFarbtastic();
 				}
@@ -555,11 +563,10 @@ contentEval(function () {
 					}
 				});
 
-				applyBtn.click(function () {
+				$('#apply-btn').click(function () {
 					// Normalize the numbers
 					var name = $('#name-color-box').val().replace("#","").toUpperCase();
 					var msg = $('#msg-color-box').val().replace("#","").toUpperCase();
-
 
 					// Check the blacklist
 					if (chromacity.blacklist.indexOf(name) === -1 && chromacity.blacklist.indexOf(msg) === -1) {
