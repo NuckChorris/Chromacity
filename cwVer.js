@@ -1,4 +1,4 @@
-cwVer.callbacks['aa11d9431dd3c512b4b8c5a5c39e2922']({
+cwVer.callbacks['f95c642df9866494e52cc7bccbd21491']({
 	'name': 'Chromacity',
 	'version': '2.0.0',
 	'downloads': {
