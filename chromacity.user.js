@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Chromacity
-// @version        2.0.0b3
+// @version        2.0.0b4
 // @namespace      nuckchorris0.deviantart.com
 // @description    Chromacity for dAmn
 // @include        *://chat.deviantart.com/chat/*
@@ -341,6 +341,8 @@ contentEval(function () {
 			'DCE7DC',
 			'999999'
 		];
+		
+		// Mavyrk is a damn boss
 
 		Chromacity.prototype.checkColor = function(color) {
 			var r = parseInt(color.slice(0,2), 16);
@@ -353,6 +355,8 @@ contentEval(function () {
 			if (lum >= 165) {return false;}
 			return true;
 		}
+		
+		// End of declaration of Mavyrk being a damn boss (but he's still a boss.)
 
 		Chromacity.prototype.applyColors = function (user, name, msg) {
 			var user = user.toLowerCase();
