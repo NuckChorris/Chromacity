@@ -342,6 +342,18 @@ contentEval(function () {
 			'999999'
 		];
 
+		Chromacity.prototype.checkColor = function(color) {
+			var r = parseInt(color.slice(0,2), 16);
+			var g = parseInt(color.slice(0,2), 16);
+			var b = parseInt(color.slice(0,2), 16);
+			r /= 255; g /= 255; b /= 255;
+			var max = Math.max(_R, _G, _B);
+			var min = Math.min(_R, _G, _B);
+			var lum = Math.round(((max + min) / 2) * 240);
+			if (lum >= 165) {return false;}
+			return true;
+		}
+
 		Chromacity.prototype.applyColors = function (user, name, msg) {
 			var user = user.toLowerCase();
 			if (arguments.length === 2) {
