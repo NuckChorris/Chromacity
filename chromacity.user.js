@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Chromacity
-// @version        2.0.0b3
+// @version        2.0.0b4
 // @namespace      nuckchorris0.deviantart.com
 // @description    Chromacity for dAmn
 // @include        *://chat.deviantart.com/chat/*
@@ -26,7 +26,7 @@ var contentEval = function (source) {
 }
 contentEval(function () {
 
-	new cwVer('http://nuckchorris.github.com/Chromacity/cwVer.js', '2.0.0b3');
+	new cwVer('http://nuckchorris.github.com/Chromacity/cwVer.js', '2.0.0b4');
 
 	var bootstrap = (function () {
 		var i = 0;
@@ -108,17 +108,28 @@ contentEval(function () {
 			this.storage = (('localStorage' in window) && window.localStorage !== null) ? 'localStorage' : 'cookies';
 			var regex = /&abbr\tcolors:((?:[A-F]|[0-9]){3}(?:(?:[A-F]|[0-9]){3})?):((?:[A-F]|[0-9]){3}(?:(?:[A-F]|[0-9]){3})?)\t/;
 
+			MiddleMan.Commands.bind("nocolors", 1, function (msg) {
+				MiddleMan.dAmnSend.msg(false, msg + "&nocolors\t");
+			});
+
 			MiddleMan.Event.bind("dAmnChat", "send", "chromacity_addColor", function (args) {
-				if (args.cmd !== "npmsg" && args.str.indexOf("(bot)") !== -1) {
-					args.str = args.str.replace("(bot)", "");
-					return args;
-				}
+				switch (args.cmd) {
+					case 'npmsg':
+						return args;
+					case 'msg':
+					case 'action':
+						if (args.str.indexOf("&nocolors\t") !== -1) {
+							args.str = args.str.replace("&nocolors\t", "");
+							return args;
+						}
 
-				if (this.colors.name && this.colors.msg) {
-					args.str += ' <abbr title="colors:' + this.colors.name + ':' + this.colors.msg + '"></abbr>';
+						if (this.colors.name && this.colors.msg) {
+							args.str += ' <abbr title="colors:' + this.colors.name + ':' + this.colors.msg + '"></abbr>';
+						}
+						break;
+					default:
+						return args;
 				}
-
-				return args;
 			}.bind(this));
 
 			MiddleMan.Event.bind("dAmnChat_recv", "msg", "chromacity_getColor", function (packet) {
