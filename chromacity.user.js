@@ -352,6 +352,22 @@ contentEval(function () {
 			'DCE7DC',
 			'999999'
 		];
+		
+		// Mavyrk is a damn boss
+
+		Chromacity.prototype.checkColor = function(color) {
+			var r = parseInt(color.slice(0,2), 16);
+			var g = parseInt(color.slice(0,2), 16);
+			var b = parseInt(color.slice(0,2), 16);
+			r /= 255; g /= 255; b /= 255;
+			var max = Math.max(_R, _G, _B);
+			var min = Math.min(_R, _G, _B);
+			var lum = Math.round(((max + min) / 2) * 240);
+			if (lum >= 165) {return false;}
+			return true;
+		}
+		
+		// End of declaration of Mavyrk being a damn boss (but he's still a boss.)
 
 		Chromacity.prototype.applyColors = function (user, name, msg) {
 			var user = user.toLowerCase();
