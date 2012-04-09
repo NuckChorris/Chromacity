@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Chromacity
-// @version        2.0.0b5
+// @version        2.0.0b6
 // @namespace      nuckchorris0.deviantart.com
 // @description    Chromacity for dAmn
 // @include        *://chat.deviantart.com/chat/*
@@ -26,7 +26,7 @@ var contentEval = function (source) {
 }
 contentEval(function () {
 
-	new cwVer('http://nuckchorris.github.com/Chromacity/cwVer.js', '2.0.0b5');
+	new cwVer('http://nuckchorris.github.com/Chromacity/cwVer.js', '2.0.0b6');
 
 	var bootstrap = (function () {
 		var i = 0;
