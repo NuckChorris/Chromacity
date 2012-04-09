@@ -362,9 +362,7 @@ contentEval(function () {
 			var g = parseInt(color.slice(2,4), 16);
 			var b = parseInt(color.slice(4,6), 16);
 			r /= 255; g /= 255; b /= 255;
-			var max = Math.max(r, g, b);
-			var min = Math.min(r, g, b);
-			var lum = Math.round(((max + min) / 2) * 240);
+			var lum = ((0.2126 * r) + (0.7152 * g) + (0.0722 * b)) * 240;;
 			return lum <= 165 && this.blacklist.indexOf(color) === -1;
 		}
 		
