@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Chromacity
-// @version        2.0.0b6
+// @version        2.0.0b7
 // @namespace      nuckchorris0.deviantart.com
 // @description    Chromacity for dAmn
 // @include        *://chat.deviantart.com/chat/*
@@ -26,7 +26,7 @@ var contentEval = function (source) {
 }
 contentEval(function () {
 
-	new cwVer('http://nuckchorris.github.com/Chromacity/cwVer.js', '2.0.0b6');
+	new cwVer('http://nuckchorris.github.com/Chromacity/cwVer.js', '2.0.0b7');
 
 	var bootstrap = (function () {
 		var i = 0;
@@ -266,6 +266,7 @@ contentEval(function () {
 				text-align: center;\n\
 				width: 50px;\n\
 				color: #FFF;\n\
+				height: 20px;\n\
 			}\n\
 			#chromacity-settings input.blacklisted {\n\
 				border-color: red;\n\
@@ -460,7 +461,7 @@ contentEval(function () {
 					$("#name-color-box").val(old.name).validHex().applyFarbtastic();
 					$("#msg-color-box").val(old.msg).validHex().applyFarbtastic();
 					$(".focus").click();
-					if (this.load('hasrun') === false){
+					if (this.load('hasrun') === false) {
 						$('#chromacity-btn').attr('src', 'http://i52.tinypic.com/2rpcztk.png').css('margin-top', '2px');
 						$(".damncrc-error .damncrc-hide img").click();
 						this.save('hasrun', true);
@@ -518,7 +519,7 @@ contentEval(function () {
 				var rPos = 0;
 				$('.damnc-header').children().each(function(){
 					var el = $(this);
-					if (el.attr('id').toLowerCase() !== 'chromacity-btn' && el.attr('id').toLowerCase() !== 'chromacity-settings') {
+					if (el.attr('id') && el.attr('id').toLowerCase() !== 'chromacity-btn' && el.attr('id').toLowerCase() !== 'chromacity-settings') {
 						var rEl = parseInt(el.css('right').replace("px",""));
 						var r = parseInt(el.outerWidth(true)) + rEl;
 						rPos = (rPos < r) ? r : rPos;
@@ -543,7 +544,7 @@ contentEval(function () {
 							var rPos = 0;
 							$('.damnc-header').children().each(function(){
 								var el = $(this);
-								if (el.attr('id').toLowerCase() !== 'chromacity-btn' && el.attr('id').toLowerCase() !== 'chromacity-settings') {
+								if (el.attr('id') && el.attr('id').toLowerCase() !== 'chromacity-btn' && el.attr('id').toLowerCase() !== 'chromacity-settings') {
 									var rEl = parseInt(el.css('right').replace("px",""));
 									var r = parseInt(el.outerWidth(true)) + rEl;
 									rPos = (rPos < r) ? r : rPos;
